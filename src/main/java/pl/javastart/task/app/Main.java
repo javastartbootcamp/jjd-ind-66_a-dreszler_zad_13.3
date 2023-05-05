@@ -6,7 +6,6 @@ import pl.javastart.task.model.Currency;
 import pl.javastart.task.model.Product;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -19,15 +18,12 @@ public class Main {
             CurrencyCalculator currencyCalculator = new CurrencyCalculator(currencies);
             String currencyCode = "EUR";
             Currency outputCurrency = currencyCalculator.getCurrency(currencyCode);
-            List<Product> convertedProducts = new ArrayList<>();
-            if (outputCurrency != null) {
-                convertedProducts.addAll(currencyCalculator.getConvertedProducts(products, outputCurrency));
-            }
+            List<Product> convertedProducts = currencyCalculator.getConvertedProducts(products, outputCurrency);
 
             BigDecimal sumOfPrices = currencyCalculator.getSumOfPrices(convertedProducts);
             System.out.println("Suma cen wszystkich produktów w " + currencyCode + ": " + sumOfPrices);
 
-            if (convertedProducts.size() != 0) {
+            if (!convertedProducts.isEmpty()) {
                 BigDecimal meanProductPrice = currencyCalculator.getMeanProductPrice(convertedProducts);
                 System.out.println("Średnia wartość produktu w " + currencyCode + ": " + meanProductPrice);
 
